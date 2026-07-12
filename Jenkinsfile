@@ -32,8 +32,8 @@ pipeline {
                     cd /home/ubuntu/my-cicd-app
                     git pull origin main
                     npm install
-                    pm2 restart myapp || pm2 start app.js --name "myapp"
-                    pm2 save
+                    sudo -u ubuntu pm2 restart myapp || sudo -u ubuntu pm2 start app.js --name "myapp"
+                    sudo -u ubuntu pm2 save
                 '''
             }
         }
