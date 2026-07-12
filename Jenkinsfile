@@ -29,10 +29,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    cd /home/ubuntu/my-cicd-app
-                    git pull origin main
-                    npm install
-                    sudo -u ubuntu pm2 restart myapp || sudo -u ubuntu pm2 start app.js --name "myapp"
+                    cp -r /var/lib/jenkins/workspace/my-cicd-app/. /home/ubuntu/my-cicd-app/
+                    sudo -u ubuntu pm2 restart myapp || sudo -u ubuntu pm2 start /home/ubuntu/my-cicd-app/app.js --name "myapp"
                     sudo -u ubuntu pm2 save
                 '''
             }
