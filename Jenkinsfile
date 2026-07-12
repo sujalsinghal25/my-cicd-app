@@ -29,6 +29,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                    cd /home/ubuntu/my-cicd-app
+                    git pull origin main
+                    npm install
                     pm2 restart myapp || pm2 start app.js --name "myapp"
                     pm2 save
                 '''
