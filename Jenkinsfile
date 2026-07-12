@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    cp -r /var/lib/jenkins/workspace/my-cicd-app/. /home/ubuntu/my-cicd-app/
+                    rsync -av --exclude='.git' /var/lib/jenkins/workspace/my-cicd-app/ /home/ubuntu/my-cicd-app/
                     sudo -u ubuntu pm2 restart myapp || sudo -u ubuntu pm2 start /home/ubuntu/my-cicd-app/app.js --name "myapp"
                     sudo -u ubuntu pm2 save
                 '''
