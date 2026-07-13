@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR = '/home/ubuntu/my-cicd-app'
         APP_NAME = 'myapp'
+        DOCKER_IMAGE = 'myapp:latest'
     }
 
     stages {
@@ -33,8 +33,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build complete!'
-                sh 'node -e "require(\'./app.js\')" &'
-                sh 'sleep 2 && kill %1 || true'
             }
         }
 
