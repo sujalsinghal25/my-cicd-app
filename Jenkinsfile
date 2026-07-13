@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        APP_DIR = '/home/ubuntu/my-cicd-app'
+        APP_NAME = 'myapp'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -18,11 +23,24 @@ pipeline {
             steps {
                 sh 'npm test'
             }
+            post {
+                failure {
+                    echo 'Tests failed! Deployment stopped.'
+                }
+            }
         }
 
         stage('Build') {
             steps {
                 echo 'Build complete!'
+                sh 'node -e "require(\'./app.js\')" &'
+                sh 'sleep 2 && kill %1 || true'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t myapp:latest .'
             }
         }
 
@@ -39,10 +57,13 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline succeeded! App deployed.'
+            echo 'Pipeline succeeded! App deployed successfully.'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo 'Pipeline failed! Check logs above.'
+        }
+        always {
+            echo 'Pipeline finished. Check application at http://13.126.57.14'
         }
     }
 }
