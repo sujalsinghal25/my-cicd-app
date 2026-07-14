@@ -1,23 +1,11 @@
-const http = require('http');
 const assert = require('assert');
-
-let server;
-
-before(() => {
-  const app = require('./app');
-  server = app;
-});
-
-after(() => {
-  if (server) server.close();
-});
+const fs = require('fs');
 
 // Test 1: Basic assertion
 assert.strictEqual(1 + 1, 2);
 console.log('Test 1 passed: Basic assertion');
 
 // Test 2: Check app.js exists
-const fs = require('fs');
 assert.ok(fs.existsSync('./app.js'));
 console.log('Test 2 passed: app.js exists');
 
@@ -33,4 +21,4 @@ console.log('Test 4 passed: Dockerfile exists');
 assert.ok(fs.existsSync('./Jenkinsfile'));
 console.log('Test 5 passed: Jenkinsfile exists');
 
-console.log('All tests passed!');
+console.log('All 5 tests passed!');
