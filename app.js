@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  res.send('Hello from CI/CD Pipeline! - Automated Deployment v6');
+  res.send('Hello from DevOps Engineer! - Automated Deployment v7');
 });
 
 app.get('/status', (req, res) => {
