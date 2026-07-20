@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/', (req, res) => {
-  res.send('Hello from DevOps Engineer Sujal Singhal! - Automated Deployment v7');
+  res.send('Hello from Sujal Singhal! - Automated Deployment v8');
 });
 
 app.get('/status', (req, res) => {
